@@ -341,7 +341,7 @@ class UserController extends Controller
                             'nama' => $request->input('nama'),
                             'alamat' => $request->input('alamat'),
                             'no_hp' => $request->input('no_hp'),
-                            'nama_toko' => $request->input('nama_toko'),
+                            'nama_toko' => $request->input( 'nama_toko'),
                             'desc_toko' => $request->input('desc_toko'),
                             'image' => $name,
                     ]);
