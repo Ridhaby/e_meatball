@@ -26,6 +26,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->removeIndexPHPFromURL();
+        
         $this->configureRateLimiting();
 
         $this->routes(function () {
@@ -36,6 +38,18 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->group(base_path('routes/api.php'));
         });
+    }
+
+    protected function removeIndexPHPFromURL()
+    {
+        if (Str::contains(request()->getRequestUri(),'/index.php/')) {
+            $url = str_replace('index.php', '', request()->getRequestUri());
+
+            if(strlen($url) > 0) {
+                header('Location: $url', true, 301);
+                exit;
+            }
+        }
     }
 
     /**
